@@ -1,0 +1,65 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/homes":
+    get:
+      summary: list homes
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create home
+      responses:
+        '200':
+          description: successful
+  "/homes/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show home
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update home
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update home
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete home
+      responses:
+        '200':
+          description: successful
+  /api/signup:
+    post:
+      summary: Creates a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses: 
+        '201':
+          description: Created
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
