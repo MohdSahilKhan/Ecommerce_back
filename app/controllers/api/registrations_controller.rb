@@ -1,4 +1,6 @@
-class Api::RegistrationsController < ApplicationController
+class Api::RegistrationsController < ActionController::Base
+  skip_before_action :verify_authenticity_token
+
     def create
       user = User.new(sign_up_params)
       if user.save
