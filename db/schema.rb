@@ -10,10 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_30_090212) do
+ActiveRecord::Schema.define(version: 2023_07_06_104501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "leaves", force: :cascade do |t|
+    t.integer "leave_balance"
+    t.string "leave_type"
+    t.date "from_date"
+    t.date "to_date"
+    t.string "leave_status"
+    t.text "reason"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_leaves_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "domain"
+    t.date "start_date"
+    t.decimal "rate"
+    t.string "currency"
+    t.string "project_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "to"
+    t.string "cc"
+    t.datetime "status_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.decimal "working_hours"
+    t.string "task_status"
+    t.bigint "project_id", null: false
+    t.bigint "status_id", null: false
+    t.text "task_description"
+    t.decimal "billing_hours"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["status_id"], name: "index_tasks_on_status_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +69,12 @@ ActiveRecord::Schema.define(version: 2023_06_30_090212) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "login_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "leaves", "users"
+  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "statuses"
 end
