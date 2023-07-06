@@ -2,7 +2,6 @@ class StatusesController < ApplicationController
     before_action :set_status, only: [:show, :edit, :update, :destroy]
 
     def index
-      binding.pry
     statuses = Status.includes(:tasks)
     render json: statuses, include: :tasks
       # render index view or return JSON response

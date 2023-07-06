@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    binding.pry
     token = request.headers['Authorization']&.split(' ')&.last
     user = User.find_by(login_token: token)
 

@@ -5,9 +5,7 @@ class Api::SessionsController < ActionController::Base
     user = User.find_for_authentication(email: params[:user][:email])
     if user && user.valid_password?(params[:user][:password])
       # Generate Token and save that token in user table.
-      binding.pry
       user.update!(login_token: Devise.friendly_token)
-      binding.pry
       sign_in(user)
       render json: { token: user.login_token }  # Make sure this line is present
     else
