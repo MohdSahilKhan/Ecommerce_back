@@ -7,7 +7,7 @@ class CreateLeaves < ActiveRecord::Migration[6.1]
       t.date :to_date
       t.string :leave_status
       t.text :reason
-      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :user, foreign_key: true
 
       t.timestamps
     end

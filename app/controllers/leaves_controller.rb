@@ -1,7 +1,9 @@
 class LeavesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_leave, only: [:show, :update, :destroy]
 
   def index
+    binding.pry
     @leaves = Leave.all
     render json: @leaves
   end
