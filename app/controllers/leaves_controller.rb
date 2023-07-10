@@ -3,13 +3,13 @@ class LeavesController < ApplicationController
   before_action :set_leave, only: [:show, :update, :destroy]
 
   def index
-    binding.pry
     @leaves = Leave.all
     render json: @leaves
   end
 
   def show
-    render json: @leave
+    leaves = Leave.find(params[:id])
+    render json: leaves
   end
 
   def create
@@ -30,8 +30,8 @@ class LeavesController < ApplicationController
   end
 
   def destroy
-    @leave.destroy
-    head :no_content
+    @leave.destroy    
+    render json: { message: 'Leave deleted successfully' }
   end
 
   private

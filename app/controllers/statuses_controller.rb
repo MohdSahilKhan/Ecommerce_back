@@ -1,6 +1,7 @@
 class StatusesController < ApplicationController
     before_action :set_status, only: [:show, :edit, :update, :destroy]
-
+    skip_before_action :verify_authenticity_token
+    
     def index
     statuses = Status.includes(:tasks)
     render json: statuses, include: :tasks

@@ -99,7 +99,252 @@ paths:
                       type: string
       responses: 
         '201':
+          description: Created  
+  /leaves:
+    get:
+      summary: Retrieve a list of leaves
+      tags:
+        - Leaves API
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create a new leave
+      description: Use this API to create a new leave.
+      tags:
+        - Leaves API
+      requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      leave:
+                        type: object
+                        properties:
+                          leave_balance:
+                            type: string
+                          leave_type:
+                            type: string
+                          from_date:
+                            type: string
+                          to_date:
+                            type: string
+                          leave_status:
+                            type: string
+                          reason:
+                            type: string
+                          user_id:
+                            type: string
+      responses:
+        '201':
+          description: Leave created successfully
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+  /leaves/{id}:
+    get:
+      summary: Show a leave
+      tags:
+        - Leaves API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to show
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Leave not found
+        '500':
+          description: Internal server error
+    put:
+      summary: update leaves.
+      tags:
+        - Leaves API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                leave:
+                        type: object
+                        properties:
+                          leave_balance:
+                            type: string
+                          leave_type:
+                            type: string
+                          from_date:
+                            type: string
+                          to_date:
+                            type: string
+                          leave_status:
+                            type: string
+                          reason:
+                            type: string
+                          user_id:
+                            type: string
+      responses: 
+        '201':
+          description: Created 
+    
+    delete:
+      summary: delete leaves.
+      tags:
+        - Leaves API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to update
+          required: true
+          schema:
+            type: integer
+      responses: 
+        '201':
+          description: Created 
+  /statuses:
+    get:
+      summary: Retrieve a list of statuses
+      tags:
+        - Status API
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+    post:
+      summary: add a new status
+      description: Use this API to create a new status.
+      tags:
+        - Status API
+      requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      status:
+                        type: object
+                        properties:
+                          to:
+                            type: string
+                          cc:
+                            type: string
+                          status_date:
+                            type: string
+                          tasks_attributes:
+                            type: object
+                            properties:
+                              working_hours:
+                                type: string
+                              task_status:
+                                type: string
+                              task_description:
+                                type: string
+                              billing_hours:
+                                type: string
+                              project_id:
+                                type: string
+      responses:
+        '201':
+          description: status created successfully
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+  /statuses/{id}:
+    get:
+      summary: Show a status.
+      tags:
+        - Status API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to update
+          required: true
+          schema:
+            type: integer                
+      responses: 
+        '201':
           description: Created
+    put:
+      summary: update Status.
+      tags:
+        - Status API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to update
+          required: true
+          schema:
+            type: integer  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                        type: object
+                        properties:
+                          to:
+                            type: string
+                          cc:
+                            type: string
+                          status_date:
+                            type: string
+                          tasks_attributes:
+                            type: object
+                            properties:
+                              working_hours:
+                                type: string
+                              task_status:
+                                type: string
+                              task_description:
+                                type: string
+                              billing_hours:
+                                type: string
+                              project_id:
+                                type: string
+      responses: 
+        '201':
+          description: Created 
+    
+    delete:
+      summary: delete Status.
+      tags:
+        - Status API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the leave to update
+          required: true
+          schema:
+            type: integer
+      responses: 
+        '201':
+          description: Created 
+  
 servers:
 - url: http://{defaultHost}
   variables:
