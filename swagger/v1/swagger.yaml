@@ -126,7 +126,7 @@ paths:
                       leave:
                         type: object
                         properties:
-                          leave_balance:
+                          leave_details:
                             type: string
                           leave_type:
                             type: string
@@ -134,11 +134,9 @@ paths:
                             type: string
                           to_date:
                             type: string
-                          leave_status:
+                          apply_to:
                             type: string
                           reason:
-                            type: string
-                          user_id:
                             type: string
       responses:
         '201':
@@ -187,7 +185,7 @@ paths:
                 leave:
                         type: object
                         properties:
-                          leave_balance:
+                          leave_details:
                             type: string
                           leave_type:
                             type: string

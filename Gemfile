@@ -65,3 +65,5 @@ gem 'devise'
 gem 'administrate'
 
 gem 'pry'
+
+gem 'rolify'
