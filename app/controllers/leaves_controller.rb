@@ -13,6 +13,7 @@ class LeavesController < ApplicationController
   end
 
   def create
+    params[:leave][:user_id]=current_user.id
     @leave = Leave.new(leave_params)
     if @leave.save
       render json: @leave, status: :created
@@ -41,6 +42,6 @@ class LeavesController < ApplicationController
   end
 
   def leave_params
-    params.require(:leave).permit(:leave_balance, :leave_type, :from_date, :to_date, :leave_status, :reason, :user_id)
+    params.require(:leave).permit(:leave_type, :from_date, :to_date, :reason,:user_id,:apply_to, :leave_details)
   end
 end
