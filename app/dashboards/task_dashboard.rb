@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class UserDashboard < Administrate::BaseDashboard
+class TaskDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,15 +9,14 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    email: Field::String,
-    encrypted_password: Field::String,
-    password: Field::String,
-    remember_created_at: Field::DateTime,
-    reset_password_sent_at: Field::DateTime,
-    reset_password_token: Field::String,
+    billing_hours: Field::String.with_options(searchable: false),
+    project: Field::BelongsTo,
+    status: Field::BelongsTo,
+    task_description: Field::Text,
+    task_status: Field::String,
+    working_hours: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    encrypted_password: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,23 +26,35 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    email
+    billing_hours
+    project
+    status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    email
-    encrypted_password
+    billing_hours
+    project
+    status
+    task_description
+    task_status
+    working_hours
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    email
-    password
+    billing_hours
+    project
+    status
+    task_description
+    task_status
+    working_hours
   ].freeze
 
   # COLLECTION_FILTERS
@@ -53,19 +64,15 @@ class UserDashboard < Administrate::BaseDashboard
   # For example to add an option to search for open resources by typing "open:"
   # in the search field:
   #
-  def encrypted_password
-    resource.password_digest
-  end
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how tasks are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
+  # def display_resource(task)
+  #   "Task ##{task.id}"
   # end
 end

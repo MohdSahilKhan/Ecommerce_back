@@ -126,7 +126,9 @@ paths:
                       leave:
                         type: object
                         properties:
-                          leave_details:
+                          from_time:
+                            type: string
+                          to_time:
                             type: string
                           leave_type:
                             type: string
@@ -134,9 +136,11 @@ paths:
                             type: string
                           to_date:
                             type: string
-                          apply_to:
+                          leave_status:
                             type: string
                           reason:
+                            type: string
+                          consumed_leave:
                             type: string
       responses:
         '201':
@@ -185,7 +189,9 @@ paths:
                 leave:
                         type: object
                         properties:
-                          leave_details:
+                          from_time:
+                            type: string
+                          to_time:
                             type: string
                           leave_type:
                             type: string
@@ -197,8 +203,9 @@ paths:
                             type: string
                           reason:
                             type: string
-                          user_id:
+                          consumed_leave:
                             type: string
+
       responses: 
         '201':
           description: Created 

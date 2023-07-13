@@ -35,6 +35,14 @@ class LeavesController < ApplicationController
     render json: { message: 'Leave deleted successfully' }
   end
 
+  def displayleaves
+    binding.pry
+    leavebalance = Leave.leavebalance(current_user.id)
+    paidleaves = Leave.paidleaves(current_user.id)
+    sickleaves = Leave.sickleaves(current_user.id)
+    render json: { leavebalance: leavebalance, paidleaves: paidleaves, sickleaves: sickleaves }
+  end
+
   private
 
   def set_leave
@@ -42,6 +50,7 @@ class LeavesController < ApplicationController
   end
 
   def leave_params
-    params.require(:leave).permit(:leave_type, :from_date, :to_date, :reason,:user_id,:apply_to, :leave_details)
+    params.require(:leave).permit(:leave_type, :from_date, :to_date, :reason,:user_id,:apply_to, :from_time, :to_time, :consumed_leave)
   end
+
 end

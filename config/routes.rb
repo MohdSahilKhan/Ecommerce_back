@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users
+    root to: "users#index"
+    resources :users
+    resources :statuses
+    resources :tasks
+    resources :projects
+  end
 
-      root to: "users#index"
-    end
+  get '/displayleaves', to: 'leaves#displayleaves'
+
   devise_for :users
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
