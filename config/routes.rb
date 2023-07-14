@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :projects
   end
 
-  get '/displayleaves', to: 'leaves#displayleaves'
+  get '/displayleaves', to: 'leaves#display_leaves'
 
   devise_for :users
   mount Rswag::Ui::Engine => '/api-docs'

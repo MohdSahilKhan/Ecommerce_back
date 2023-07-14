@@ -35,12 +35,11 @@ class LeavesController < ApplicationController
     render json: { message: 'Leave deleted successfully' }
   end
 
-  def displayleaves
-    binding.pry
-    leavebalance = Leave.leavebalance(current_user.id)
-    paidleaves = Leave.paidleaves(current_user.id)
-    sickleaves = Leave.sickleaves(current_user.id)
-    render json: { leavebalance: leavebalance, paidleaves: paidleaves, sickleaves: sickleaves }
+  def display_leaves
+    paid_leaves = Leave.paid_leaves(current_user.id)
+    sick_leaves = Leave.sick_leaves(current_user.id)
+    leave_balance = paid_leaves + sick_leaves
+    render json: { leave_balance: leave_balance, paid_leaves: paid_leaves, sick_leaves: sick_leaves }
   end
 
   private

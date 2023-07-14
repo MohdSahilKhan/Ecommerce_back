@@ -224,6 +224,18 @@ paths:
       responses: 
         '201':
           description: Created 
+  /displayleaves:
+    get:
+      summary: Retrieve a list of leaves for dashboard
+      tags:
+        - Leaves API
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+
   /statuses:
     get:
       summary: Retrieve a list of statuses
