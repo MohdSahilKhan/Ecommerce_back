@@ -5,6 +5,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_and_belongs_to_many :managers,
+  class_name: 'User',
+  join_table: 'managers_users',
+  foreign_key: 'user_id',
+  association_foreign_key: 'manager_id' 
 
   after_create :assign_default_role
 

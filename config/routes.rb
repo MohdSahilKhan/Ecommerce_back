@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :managers
   namespace :admin do
     root to: "users#index"
     resources :users
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :statuses
   resources :leaves
+
+  post '/users/:user_id/assign_managers', to: 'users#assign_managers'
 
   namespace :api do
     post 'login', to: 'sessions#create'
