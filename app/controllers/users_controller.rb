@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :verify_authenticity_token
+    #skip_before_action :verify_authenticity_token
 
   def assign_managers
     user = User.find(params[:user_id])
@@ -8,5 +8,5 @@ class UsersController < ApplicationController
     user.managers << managers
     render json: { message: 'Managers assigned successfully' }
   end
-  
+
 end

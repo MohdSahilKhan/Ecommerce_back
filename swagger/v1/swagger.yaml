@@ -3,6 +3,17 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
 paths:
   /api/signup:
     post:
@@ -361,6 +372,7 @@ paths:
       responses: 
         '201':
           description: Created 
+
   /users/{id}/assign_managers:
     post:
       summary: assign managers.
@@ -385,8 +397,7 @@ paths:
                         items:
                           type: integer
               example:
-                manager_ids: [3, 6]
-                        
+                manager_ids: [3, 6]                        
         responses: 
         '201':
           description: status created successfully
@@ -407,9 +418,11 @@ paths:
           description: Invalid request
         '500':
           description: Internal server error
+
   
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3000
+

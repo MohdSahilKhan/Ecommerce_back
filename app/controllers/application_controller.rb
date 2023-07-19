@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     token = request.headers['Authorization']&.split(' ')&.last
     user = User.find_by(login_token: token)
 
-    if user
+    if user.present? && user.login_token.present?
       sign_in user, store: false
     else
       render json: { error: 'Invalid token' }, status: :unauthorized
