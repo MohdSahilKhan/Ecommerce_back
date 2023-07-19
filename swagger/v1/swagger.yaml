@@ -152,6 +152,8 @@ paths:
                           reason:
                             type: string
                           consumed_leave:
+                            type: integer
+                          apply_to:
                             type: string
       responses:
         '201':

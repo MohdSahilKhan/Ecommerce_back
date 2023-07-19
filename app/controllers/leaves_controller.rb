@@ -1,5 +1,5 @@
 class LeavesController < ApplicationController
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   before_action :set_leave, only: [:show, :update, :destroy]
 
   def index
@@ -49,7 +49,7 @@ class LeavesController < ApplicationController
   end
 
   def leave_params
-    params.require(:leave).permit(:leave_type, :from_date, :to_date, :reason,:user_id,:apply_to, :from_time, :to_time, :consumed_leave)
+    params.require(:leave).permit(:leave_type, :from_date, :to_date, :reason,:user_id,:apply_to, :from_time, :to_time, :consumed_leave, :leave_status)
   end
 
 end

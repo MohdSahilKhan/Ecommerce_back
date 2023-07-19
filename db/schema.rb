@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_17_075047) do
+ActiveRecord::Schema.define(version: 2023_07_19_095151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2023_07_17_075047) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "apply_to"
-    t.datetime "from_time"
-    t.datetime "to_time"
+    t.string "from_time"
+    t.string "to_time"
     t.integer "consumed_leave"
     t.index ["user_id"], name: "index_leaves_on_user_id"
   end
@@ -96,6 +96,32 @@ ActiveRecord::Schema.define(version: 2023_07_17_075047) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "login_token"
     t.integer "manager_id"
+    t.string "full_name"
+    t.string "father_name"
+    t.string "mother_name"
+    t.string "location"
+    t.string "linkedin_profile"
+    t.string "contact_no"
+    t.string "personal_email"
+    t.string "official_email"
+    t.string "emergency_contact"
+    t.string "blood_group"
+    t.string "marital_status"
+    t.datetime "date_of_birth"
+    t.string "uan_no"
+    t.string "esic_no"
+    t.string "employee_id"
+    t.string "employee_type"
+    t.string "job_type"
+    t.string "date_of_joining"
+    t.string "relieving_date"
+    t.string "resignation_date"
+    t.string "resignation_status"
+    t.string "notice_period"
+    t.string "retention_bonus"
+    t.string "retention_time"
+    t.string "retention_bonus_no"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
