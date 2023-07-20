@@ -11,6 +11,9 @@ class User < ApplicationRecord
   foreign_key: 'user_id',
   association_foreign_key: 'manager_id' 
 
+  # validates :employee_type, inclusion: { in: ['full time', 'contract'] }
+  # validates :job_type, inclusion: { in: ['remote', 'wfo'] }
+
   after_create :assign_default_role
 
   def assign_default_role
