@@ -4,7 +4,7 @@ class ManagersController < ApplicationController
   # GET /managers or /managers.json
   def index
     @managers =  User.find(current_user.id).managers.pluck(:id,:email)
-    render json: @managers
+    render json: @managers, status: :ok
   end
 
 end

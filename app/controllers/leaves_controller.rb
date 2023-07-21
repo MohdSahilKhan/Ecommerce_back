@@ -4,12 +4,12 @@ class LeavesController < ApplicationController
 
   def index
     @leaves = Leave.all
-    render json: @leaves
+    render json: @leaves, status: :ok
   end
 
   def show
     leaves = Leave.find(params[:id])
-    render json: leaves
+    render json: leaves, status: :ok
   end
 
   def create
@@ -24,7 +24,7 @@ class LeavesController < ApplicationController
 
   def update
     if @leave.update(leave_params)
-      render json: @leave
+      render json: @leave, status: :ok
     else
       render json: @leave.errors, status: :unprocessable_entity
     end
@@ -32,14 +32,14 @@ class LeavesController < ApplicationController
 
   def destroy
     @leave.destroy    
-    render json: { message: 'Leave deleted successfully' }
+    render json: { message: 'Leave deleted successfully' }, status: :ok
   end
 
   def display_leaves
     paid_leaves = Leave.paid_leaves(current_user.id)
     sick_leaves = Leave.sick_leaves(current_user.id)
     leave_balance = paid_leaves + sick_leaves
-    render json: { leave_balance: leave_balance, paid_leaves: paid_leaves, sick_leaves: sick_leaves }
+    render json: { leave_balance: leave_balance, paid_leaves: paid_leaves, sick_leaves: sick_leaves }, status: :ok
   end
 
   private

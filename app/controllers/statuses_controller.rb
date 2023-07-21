@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
     before_action :set_status, only: [:show, :edit, :update, :destroy]
-    # skip_before_action :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
     
     def index
     statuses = Status.includes(:tasks)
@@ -44,7 +44,7 @@ class StatusesController < ApplicationController
       status = Status.find(params[:id])
       status.tasks.destroy_all
       status.destroy
-      render json: { message: 'Status and associated tasks deleted successfully' }
+      render json: { message: 'Status and associated tasks deleted successfully' }, status: :ok
     end
   
     private

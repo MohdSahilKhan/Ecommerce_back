@@ -420,7 +420,132 @@ paths:
           description: Invalid request
         '500':
           description: Internal server error
-
+  
+  /users/{id}:
+    get:
+      summary: Show a user.
+      tags:
+        - Users API
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user
+          required: true
+          schema:
+            type: integer                
+      responses: 
+        '201':
+          description: Created
+  
+  /users/new_user:
+    post:
+      summary: Creates a user.
+      tags:
+        - Users API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    full_name:
+                      type: string
+                    father_name:
+                      type: string
+                    mother_name:
+                      type: string
+                    location:
+                      type: string
+                    linkedin_profile:
+                      type: string
+                    contact_no:
+                      type: string
+                    personal_email:
+                      type: string
+                    official_email:
+                      type: string
+                    emergency_contact:
+                      type: string
+                    blood_group:
+                      type: string
+                    marital_status:
+                      type: string
+                    date_of_birth:
+                      type: string
+                      format: date
+                    uan_no:
+                      type: string
+                    esic_no:
+                      type: string
+                    employee_id:
+                      type: string
+                    employee_type:
+                      type: string
+                    job_type:
+                      type: string
+                    date_of_joining:
+                      type: string
+                      format: date
+                    relieving_date:
+                      type: string
+                      format: date
+                    resignation_date:
+                      type: string
+                      format: date
+                    resignation_status:
+                      type: string
+                    notice_period:
+                      type: string
+                    retention_bonus:
+                      type: boolean
+                    retention_time:
+                      type: string
+                    retention_bonus_no:
+                      type: string
+                  example:
+                      email: "john.doe@example.com"
+                      password: "securepassword"
+                      password_confirmation: "securepassword"
+                      full_name: "John Doe"
+                      father_name: "John Doe Sr."
+                      mother_name: "Mary Doe"
+                      location: "New York"
+                      linkedin_profile: "https://www.linkedin.com/in/johndoe/"
+                      contact_no: "1234567890"
+                      personal_email: "john.doe.personal@example.com"
+                      official_email: "john.doe@company.com"
+                      emergency_contact: "9876543210"
+                      blood_group: "A+"
+                      marital_status: "Single"
+                      date_of_birth: "1990-01-01"
+                      uan_no: "UAN1234567890"
+                      esic_no: "ESIC123456"
+                      employee_id: "EMP001"
+                      employee_type: "Full-Time"
+                      job_type: "Software Engineer"
+                      date_of_joining: "2022-01-01"
+                      relieving_date: null
+                      resignation_date: null
+                      resignation_status: null
+                      notice_period: "1 month"
+                      retention_bonus: true
+                      retention_time: "2 years"
+                      retention_bonus_no: "RB123"
+      responses:
+        '201':
+          description: User created successfully.
+        '422':
+          description: Unprocessable Entity - Request validation failed.
   
 servers:
 - url: http://{defaultHost}

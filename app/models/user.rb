@@ -17,7 +17,7 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def assign_default_role
-    self.add_role(:user) unless self.has_any_role?
+    self.add_role(:employee) unless self.has_any_role?
   end
 
 end
