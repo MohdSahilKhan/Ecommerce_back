@@ -3,7 +3,8 @@ class Api::SessionsController < ActionController::Base
   
   def create
     user = User.find_for_authentication(email: params[:user][:email])
-    if user && user.valid_password?(params[:user][:password])
+    roles = user.roles.map(&:name)
+    if user && user.valid_password?(params[:user][:password]) && roles.include?(params[:user][:role])
       # Generate Token and save that token in user table.
       user.update!(login_token: Devise.friendly_token)
       sign_in(user)
