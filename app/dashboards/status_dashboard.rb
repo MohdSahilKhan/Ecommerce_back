@@ -1,12 +1,11 @@
 require "administrate/base_dashboard"
 
 class StatusDashboard < Administrate::BaseDashboard
-  
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     cc: Field::String,
     status_date: Field::DateTime,
-    tasks: Field::HasMany,
+    tasks: Field::NestedHasMany.with_options(skip: :id),
     to: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -25,6 +24,8 @@ class StatusDashboard < Administrate::BaseDashboard
     status_date
     tasks
     to
+    created_at
+    updated_at
   ].freeze
 
   FORM_ATTRIBUTES = %i[
@@ -35,5 +36,4 @@ class StatusDashboard < Administrate::BaseDashboard
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze
-
 end
