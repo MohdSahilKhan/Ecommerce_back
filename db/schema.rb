@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_19_095151) do
+ActiveRecord::Schema.define(version: 2023_07_25_071406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bank_details", force: :cascade do |t|
+    t.string "account_name"
+    t.string "account_number"
+    t.string "ifsc"
+    t.string "cancelled_cheque"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_bank_details_on_user_id"
+  end
+
+  create_table "deductions", force: :cascade do |t|
+    t.decimal "pf", precision: 10, scale: 2
+    t.decimal "esic", precision: 10, scale: 2
+    t.decimal "tds", precision: 10, scale: 2
+    t.decimal "professional_tax", precision: 10, scale: 2
+    t.decimal "gratuity", precision: 10, scale: 2
+    t.decimal "income_tax", precision: 10, scale: 2
+    t.decimal "old_regime", precision: 10, scale: 2
+    t.decimal "new_regime", precision: 10, scale: 2
+    t.decimal "leave_deduction", precision: 10, scale: 2
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_deductions_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "resume"
+    t.string "aadhar"
+    t.string "pan"
+    t.string "passport"
+    t.string "relieving_letter"
+    t.string "experience_letter"
+    t.string "bank_statement_3_mon"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
 
   create_table "leaves", force: :cascade do |t|
     t.integer "leave_balance", default: 40
@@ -63,6 +104,18 @@ ActiveRecord::Schema.define(version: 2023_07_19_095151) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "salary_infos", force: :cascade do |t|
+    t.decimal "basic_salary", precision: 10, scale: 2
+    t.decimal "hra", precision: 10, scale: 2
+    t.decimal "allowance_medical", precision: 10, scale: 2
+    t.decimal "allowance_special", precision: 10, scale: 2
+    t.decimal "incentives", precision: 10, scale: 2
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_salary_infos_on_user_id"
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -134,7 +187,11 @@ ActiveRecord::Schema.define(version: 2023_07_19_095151) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "bank_details", "users"
+  add_foreign_key "deductions", "users"
+  add_foreign_key "documents", "users"
   add_foreign_key "leaves", "users"
+  add_foreign_key "salary_infos", "users"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "statuses"
 end

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :statuses
   resources :leaves
+  resources :salary_infos
   post '/users/new_user', to: 'users#create'
 
   post '/users/:user_id/assign_managers', to: 'users#assign_managers'
