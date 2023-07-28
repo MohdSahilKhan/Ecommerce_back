@@ -4,18 +4,17 @@ class StatusesController < ApplicationController
     
     def index
     statuses = Status.includes(:tasks)
-    render json: statuses, include: :tasks
-      # render index view or return JSON response
+      render json: statuses, include: :tasks
     end
   
     def show
       status = Status.includes(:tasks).find(params[:id])
-      render json: status, include: :tasks
+        render json: status, include: :tasks
     end
   
     def new
       @status = Status.new
-      # render new view or return JSON response
+      
     end
   
     def create
@@ -29,16 +28,20 @@ class StatusesController < ApplicationController
     end
   
     def edit
-      # render edit view or return JSON response
+      
     end
   
+      
     def update
+      @status = Status.find(params[:id])
       if @status.update(status_params)
-        # handle successful update (redirect or return JSON response)
+        render json: @status, include: :tasks
       else
-        # handle validation errors (render edit view or return JSON response with errors)
+        render json: @status.errors, status: :unprocessable_entity
       end
     end
+    
+    
   
     def destroy
       status = Status.find(params[:id])
@@ -54,7 +57,7 @@ class StatusesController < ApplicationController
     end
     
     def status_params
-        params.require(:status).permit(:to, :cc, :status_date, tasks_attributes: [:working_hours, :task_status, :task_description, :billing_hours, :project_id])
+        params.require(:status).permit(:to, :cc, :status_date, tasks_attributes: [ :id , :working_hours, :task_status, :task_description, :billing_hours, :project_id])
 
     end
 
