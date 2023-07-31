@@ -30,4 +30,5 @@ Rails.application.routes.draw do
     put 'reset_password', to: 'passwords#update'
   end
 
+  resources :bank_details
 end
