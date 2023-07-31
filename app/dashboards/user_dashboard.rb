@@ -1,71 +1,123 @@
 require "administrate/base_dashboard"
 
 class UserDashboard < Administrate::BaseDashboard
-  # ATTRIBUTE_TYPES
-  # a hash that describes the type of each of the model's fields.
-  #
-  # Each different type represents an Administrate::Field object,
-  # which determines how the attribute is displayed
-  # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    blood_group: Field::String,
+    contact_no: Field::String,
+    date_of_birth: Field::DateTime,
+    date_of_joining: Field::String,
     email: Field::String,
-    encrypted_password: Field::String,
     password: Field::String,
+    emergency_contact: Field::String,
+    employee_id: Field::String,
+    employee_type: Field::String,
+    encrypted_password: Field::String,
+    esic_no: Field::String,
+    father_name: Field::String,
+    full_name: Field::String,
+    job_type: Field::String,
+    linkedin_profile: Field::String,
+    location: Field::String,
+    login_token: Field::String,
+    manager_id: Field::Number,
+    managers: Field::HasMany,
+    marital_status: Field::String,
+    mother_name: Field::String,
+    name: Field::String,
+    notice_period: Field::String,
+    official_email: Field::String,
+    personal_email: Field::String,
+    relieving_date: Field::String,
     remember_created_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    encrypted_password: Field::String,
+    resignation_date: Field::String,
+    resignation_status: Field::String,
+    retention_bonus: Field::String,
+    retention_bonus_no: Field::String,
+    retention_time: Field::String,
+    roles: Field::HasMany.with_options(class_name: "Role"),
+    uan_no: Field::String,
   }.freeze
 
-  # COLLECTION_ATTRIBUTES
-  # an array of attributes that will be displayed on the model's index page.
-  #
-  # By default, it's limited to four items to reduce clutter on index pages.
-  # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    full_name
+    contact_no
     email
   ].freeze
 
-  # SHOW_PAGE_ATTRIBUTES
-  # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    blood_group
+    contact_no
+    date_of_birth
+    date_of_joining
     email
-    encrypted_password
+    emergency_contact
+    employee_id
+    employee_type
+    esic_no
+    father_name
+    full_name
+    job_type
+    linkedin_profile
+    location
+    manager_id
+    managers
+    marital_status
+    mother_name
+    name
+    notice_period
+    official_email
+    personal_email
+    relieving_date
+    resignation_date
+    resignation_status
+    retention_bonus
+    retention_bonus_no
+    retention_time
+    uan_no
+    roles
   ].freeze
 
-  # FORM_ATTRIBUTES
-  # an array of attributes that will be displayed
-  # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    blood_group
+    contact_no
+    date_of_birth
+    date_of_joining
     email
     password
+    emergency_contact
+    employee_id
+    employee_type
+    esic_no
+    father_name
+    full_name
+    job_type
+    linkedin_profile
+    location
+    manager_id
+    managers
+    marital_status
+    mother_name
+    name
+    notice_period
+    official_email
+    personal_email
+    relieving_date
+    resignation_date
+    resignation_status
+    retention_bonus
+    retention_bonus_no
+    retention_time
+    roles
+    uan_no
   ].freeze
 
-  # COLLECTION_FILTERS
-  # a hash that defines filters that can be used while searching via the search
-  # field of the dashboard.
-  #
-  # For example to add an option to search for open resources by typing "open:"
-  # in the search field:
-  #
-  def encrypted_password
-    resource.password_digest
-  end
-  #   COLLECTION_FILTERS = {
-  #     open: ->(resources) { resources.where(open: true) }
-  #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-
-  # Overwrite this method to customize how users are displayed
-  # across all pages of the admin dashboard.
-  #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
 end
+
+

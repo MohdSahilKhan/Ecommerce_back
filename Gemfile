@@ -67,4 +67,6 @@ gem 'administrate'
 
 gem 'pry'
 
+gem "administrate-field-nested_has_many"
+
 gem 'rolify'

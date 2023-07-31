@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :statuses
     resources :tasks
     resources :projects
+    resources :roles
   end
 
   get '/displayleaves', to: 'leaves#display_leaves'
