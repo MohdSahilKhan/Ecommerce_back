@@ -70,3 +70,5 @@ gem 'pry'
 gem "administrate-field-nested_has_many"
 
 gem 'rolify'
+
+gem 'jwt'
