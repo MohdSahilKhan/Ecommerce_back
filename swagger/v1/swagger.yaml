@@ -466,8 +466,6 @@ paths:
                       type: string
                     mother_name:
                       type: string
-                    location:
-                      type: string
                     linkedin_profile:
                       type: string
                     contact_no:
@@ -475,8 +473,6 @@ paths:
                     personal_email:
                       type: string
                     official_email:
-                      type: string
-                    emergency_contact:
                       type: string
                     blood_group:
                       type: string
@@ -514,6 +510,16 @@ paths:
                       type: string
                     retention_bonus_no:
                       type: string
+                    gender:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    pincode:
+                      type: string
+                    address:
+                      type: string 
                   example:
                       email: "john.doe@example.com"
                       password: "securepassword"
@@ -521,12 +527,10 @@ paths:
                       full_name: "John Doe"
                       father_name: "John Doe Sr."
                       mother_name: "Mary Doe"
-                      location: "New York"
                       linkedin_profile: "https://www.linkedin.com/in/johndoe/"
                       contact_no: "1234567890"
                       personal_email: "john.doe.personal@example.com"
                       official_email: "john.doe@company.com"
-                      emergency_contact: "9876543210"
                       blood_group: "A+"
                       marital_status: "Single"
                       date_of_birth: "1990-01-01"
@@ -543,6 +547,11 @@ paths:
                       retention_bonus: true
                       retention_time: "2 years"
                       retention_bonus_no: "RB123"
+                      gender: "male"
+                      city: "jaipur"
+                      state: "rajsthan"
+                      pincode: "123321"
+                      address: "malviy nagar, jaipur"
       responses:
         '201':
           description: User created successfully.

@@ -5,7 +5,7 @@ class StatusDashboard < Administrate::BaseDashboard
     id: Field::Number,
     cc: Field::String,
     status_date: Field::DateTime,
-    tasks: Field::NestedHasMany.with_options(skip: :id),
+    tasks: Field::NestedHasMany.with_options(skip: [:id , :status]),
     to: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -22,17 +22,15 @@ class StatusDashboard < Administrate::BaseDashboard
     id
     cc
     status_date
-    tasks
     to
-    created_at
-    updated_at
+    tasks
   ].freeze
 
   FORM_ATTRIBUTES = %i[
     cc
     status_date
-    tasks
     to
+    tasks
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze
