@@ -5,7 +5,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     blood_group: Field::String,
     contact_no: Field::String,
-    date_of_birth: Field::DateTime,
+    date_of_birth: Field::Date,
     date_of_joining: Field::String,
     email: Field::String,
     password: Field::String,
