@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :leaves
   resources :salary_infos
   post '/users/new_user', to: 'users#create'
+  get '/users/:id', to: 'users#show'
 
   post '/users/:user_id/assign_managers', to: 'users#assign_managers'
 
