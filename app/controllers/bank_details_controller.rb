@@ -1,9 +1,13 @@
 class BankDetailsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  # skip_before_action :authenticate_user!
+  # before_action :set_status, 
     def index
       @bank_details = BankDetail.all
     end
   
     def show
+
       @bank_details = BankDetail.find(params[:id])
     end
   
@@ -12,12 +16,15 @@ class BankDetailsController < ApplicationController
     end
   
     def create
-      @bank_details = BankDetail.new(bank_params)
-  
-      if @bank_details.save
-        redirect_to @article
+      # binding.pry
+      # @user = User.find(params[:id])
+      params[:user_id] = current_user.id
+      @user = User.find(params[:user_id])
+      bank_details = @user.bank_details.new(bank_params)
+      if bank_details.save
+        render json: { message: 'Bank Detils created successfully' }
       else
-        render :new, status: :unprocessable_entity
+        render json: { error: bank_details.errors.full_messages.join(', ') }, status: :unprocessable_entity
       end
     end
   
@@ -44,7 +51,19 @@ class BankDetailsController < ApplicationController
   
     private
       def bank_params
-        params.require(:article).permit(:account_name, :account_number, :ifsc, :cancelled_cheque, :user_id)
+        params.require(:bank_details).permit(:account_name, :account_number, :ifsc, :cancelled_cheque)
       end
   end
   
+
+
+
+
+
+
+
+
+
+
+
+

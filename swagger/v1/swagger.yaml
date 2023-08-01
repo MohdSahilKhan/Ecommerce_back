@@ -633,23 +633,8 @@ paths:
       responses: 
         '201':
           description: Created 
-      
 
-  # /salary_infos/{id}:
-  #   get:
-  #     summary: Show salary information .
-  #     tags:
-  #       - Bank details API
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         description: ID of the leave to update
-  #         required: true
-  #         schema:
-  #           type: integer                
-  #     responses: 
-  #       '201':
-  #         description: Created 
+
   /bank_details:
     post:
       summary: Creates a Bank detail.
@@ -673,12 +658,17 @@ paths:
                       type: string
                     cancelled_cheque:
                       type: string
-      responses: 
+                    # user_id:
+                    #   type: integer
+                    #   format: int64
+      responses:
         '201':
           description: Created
-  /api/reset_password:
-    post:
-      summary: user reset password.
+  /bank_details/{id}:
+    put:
+      summary: Update bank details
+      tags:
+        - Bank details API
       requestBody:
         required: true
         content:
@@ -695,15 +685,72 @@ paths:
                       type: string
                     password_confirmation:
                       type: string
-      responses: 
+      responses:
+        '201':
+          description: Created     
+  # /bank_details/{id}:
+    get:
+      summary: See bank details
+      tags:
+        - Bank details API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    reset_password_token:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+      responses:
         '201':
           description: Created
+      
+  # /bank_details/{id}:
+    delete:
+      summary: Delete bank details
+      tags:
+        - Bank details API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    reset_password_token:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+      responses:
+        '201':
+          description: Created
+
+
+
+
+
+
+
+
+
+
+
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3000
-
-
-
 

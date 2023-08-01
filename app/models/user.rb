@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  
   has_and_belongs_to_many :managers,
   class_name: 'User',
   join_table: 'managers_users',
@@ -19,5 +19,5 @@ class User < ApplicationRecord
   def assign_default_role
     self.add_role(:employee) unless self.has_any_role?
   end
-
+  has_many :bank_details, dependent: :destroy
 end
