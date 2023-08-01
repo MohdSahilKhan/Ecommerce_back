@@ -10,7 +10,7 @@ class User < ApplicationRecord
   join_table: 'managers_users',
   foreign_key: 'user_id',
   association_foreign_key: 'manager_id' 
-
+  has_many :documents
   # validates :employee_type, inclusion: { in: ['full time', 'contract'] }
   # validates :job_type, inclusion: { in: ['remote', 'wfo'] }
 

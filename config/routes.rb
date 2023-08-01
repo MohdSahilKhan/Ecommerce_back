@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     resources :projects
     resources :roles
   end
-
+  
   get '/displayleaves', to: 'leaves#display_leaves'
-
+  
   devise_for :users
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   resources :leaves
   resources :salary_infos
   post '/users/new_user', to: 'users#create'
+  
   get '/users/:id', to: 'users#show'
 
   post '/users/:user_id/assign_managers', to: 'users#assign_managers'
-
+  
   namespace :api do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
@@ -30,5 +31,6 @@ Rails.application.routes.draw do
     post 'forgot_password', to: 'passwords#create'
     put 'reset_password', to: 'passwords#update'
   end
-
+  
+  resources :documents
 end

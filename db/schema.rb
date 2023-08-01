@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_25_071406) do
+ActiveRecord::Schema.define(version: 2023_08_01_041823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,15 +152,13 @@ ActiveRecord::Schema.define(version: 2023_07_25_071406) do
     t.string "full_name"
     t.string "father_name"
     t.string "mother_name"
-    t.string "location"
     t.string "linkedin_profile"
     t.string "contact_no"
     t.string "personal_email"
     t.string "official_email"
-    t.string "emergency_contact"
     t.string "blood_group"
     t.string "marital_status"
-    t.datetime "date_of_birth"
+    t.date "date_of_birth"
     t.string "uan_no"
     t.string "esic_no"
     t.string "employee_id"
@@ -175,6 +173,11 @@ ActiveRecord::Schema.define(version: 2023_07_25_071406) do
     t.string "retention_time"
     t.string "retention_bonus_no"
     t.string "name"
+    t.string "gender"
+    t.string "city"
+    t.string "pincode"
+    t.string "state"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

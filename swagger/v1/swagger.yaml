@@ -607,6 +607,7 @@ paths:
       responses: 
         '201':
           description: Created 
+
   /salary_infos:
     get:
       summary: Show all salary information .
@@ -642,13 +643,128 @@ paths:
       responses: 
         '201':
           description: Created 
-      
 
-      
+        
+          
+  /documents:
+    get:
+      summary: Show all documents information.
+      tags:
+        - Document API
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create Document data.
+      tags:
+        - Document API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: object
+                  properties:
+                    resume:
+                      type: string
+                    aadhar:
+                      type: string
+                    pan:
+                      type: string
+                    passport:
+                      type: string
+                    relieving_letter:
+                      type: string
+                    experience_letter:
+                      type: string
+                    bank_statement_3_mon:
+                      type: string
+                    
+      responses:
+        '201':
+          description: Status created successfully
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+
+
+
+  /documents/{id}:
+      get:
+        summary: Show a document
+        tags:
+          - Document API
+        parameters:
+          - name: id
+            in: path
+            description: ID of the document to show
+            required: true
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Successful response
+          '404':
+            description: Document not found
+          '500':
+            description: Internal server error
+
+
+      put:
+        summary: Update Document data.
+        tags:
+          - Document API
+        parameters:
+        - name: id
+          in: path
+          description: ID of the document to update
+          required: true
+          schema:
+            type: integer
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    type: object
+                    properties:
+                      resume:
+                        type: string
+                      aadhar:
+                        type: string
+                      pan:
+                        type: string
+                      passport:
+                        type: string
+                      relieving_letter:
+                        type: string
+                      experience_letter:
+                        type: string
+                      bank_statement_3_mon:
+                        type: string
+                      
+        responses:
+          '201':
+            description: Status created successfully
+          '400':
+            description: Invalid request
+          '500':
+            description: Internal server error
+    
 
 servers:
-- url: http://{defaultHost}
+- url: http://127.0.0.1:3000
   variables:
     defaultHost:
-      default: localhost:3000
+      default: http://127.0.0.1:3000
 
