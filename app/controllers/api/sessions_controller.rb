@@ -4,7 +4,7 @@ class Api::SessionsController < ActionController::Base
 
   def create
     user = User.find_for_authentication(email: params[:user][:email])
-    roles = user.roles.map(&:name)
+    roles = user.roles.map(&:name) unless user.blank?
 
     if user && user.valid_password?(params[:user][:password])
       role = params[:user][:role]
