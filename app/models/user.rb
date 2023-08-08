@@ -20,4 +20,5 @@ class User < ApplicationRecord
     self.add_role(:employee) unless self.has_any_role?
   end
   has_many :bank_details, dependent: :destroy
+  has_one_attached :profile_picture
 end

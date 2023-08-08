@@ -438,6 +438,30 @@ paths:
       responses: 
         '201':
           description: Created
+    put:
+      summary: Add profile picture.
+      tags:
+        - Users API
+      parameters:
+        - name: id
+          in: path
+          description: ID to update profile picture.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile_picture:
+                  type: string
+                  format: binary
+      responses: 
+        '201':
+          description: Created 
   
   /users/new_user:
     post:
@@ -747,14 +771,6 @@ paths:
       responses: 
         '201':
           description: Created 
-
-
-
-
-
-
-
-
 
 
 servers:
