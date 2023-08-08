@@ -472,8 +472,6 @@ paths:
                       type: string
                     personal_email:
                       type: string
-                    official_email:
-                      type: string
                     blood_group:
                       type: string
                     marital_status:
@@ -520,6 +518,10 @@ paths:
                       type: string
                     address:
                       type: string 
+                    designation:
+                      type: string
+                    emergency_contact_no:
+                      type: string
                   example:
                       email: "john.doe@example.com"
                       password: "securepassword"
@@ -530,7 +532,6 @@ paths:
                       linkedin_profile: "https://www.linkedin.com/in/johndoe/"
                       contact_no: "1234567890"
                       personal_email: "john.doe.personal@example.com"
-                      official_email: "john.doe@company.com"
                       blood_group: "A+"
                       marital_status: "Single"
                       date_of_birth: "1990-01-01"
@@ -552,6 +553,9 @@ paths:
                       state: "rajsthan"
                       pincode: "123321"
                       address: "malviy nagar, jaipur"
+                      designation: "react-developer"
+                      emergency_contact_no: "1234567890"
+                     
       responses:
         '201':
           description: User created successfully.
@@ -671,6 +675,8 @@ paths:
                 document:
                   type: object
                   properties:
+                    user_id:
+                      type: string
                     resume:
                       type: string
                     aadhar:
@@ -738,6 +744,8 @@ paths:
                   document:
                     type: object
                     properties:
+                      user_id:
+                        type: string
                       resume:
                         type: string
                       aadhar:
@@ -760,11 +768,26 @@ paths:
             description: Invalid request
           '500':
             description: Internal server error
+        
+      delete:
+        summary: Delete Document.
+        tags:
+          - Document API
+        parameters:
+          - name: id
+            in: path
+            description: ID of the document to delete
+            required: true
+            schema:
+              type: integer
+        responses: 
+          '201':
+            description: Created
     
 
 servers:
-- url: http://127.0.0.1:3000
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: http://127.0.0.1:3000
+      default: localhost:3000
 

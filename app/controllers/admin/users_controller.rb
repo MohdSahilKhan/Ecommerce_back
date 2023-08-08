@@ -28,7 +28,6 @@ module Admin
         :mother_name,
         :name,
         :notice_period,
-        :official_email,
         :personal_email,
         :relieving_date,
         :remember_created_at,
@@ -40,6 +39,8 @@ module Admin
         :retention_bonus_no,
         :retention_time,
         :uan_no,
+        :designation,
+        :emergency_contact_no,
         role_ids: [] 
       )
     end

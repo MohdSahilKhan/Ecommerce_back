@@ -24,7 +24,6 @@ class UserDashboard < Administrate::BaseDashboard
     mother_name: Field::String,
     name: Field::String,
     notice_period: Field::String,
-    official_email: Field::String,
     personal_email: Field::String,
     relieving_date: Field::String,
     remember_created_at: Field::DateTime,
@@ -41,7 +40,9 @@ class UserDashboard < Administrate::BaseDashboard
     city: Field::String,
     state: Field::String,
     pincode: Field::String,
-    address: Field::String
+    address: Field::String,
+    designation: Feild::String,
+    emergency_contact_no: Feild::String
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
@@ -76,7 +77,6 @@ class UserDashboard < Administrate::BaseDashboard
     mother_name
     name
     notice_period
-    official_email
     personal_email
     relieving_date
     resignation_date
@@ -86,6 +86,8 @@ class UserDashboard < Administrate::BaseDashboard
     retention_time
     uan_no
     roles
+    designation
+    emergency_contact_no
   ].freeze
 
   FORM_ATTRIBUTES = %i[
@@ -123,6 +125,8 @@ class UserDashboard < Administrate::BaseDashboard
     retention_time
     roles
     uan_no
+    designation
+    emergency_contact_no
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze
