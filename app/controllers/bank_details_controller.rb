@@ -1,25 +1,19 @@
 class BankDetailsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  # skip_before_action :authenticate_user!
-  # before_action :set_status, 
-    def index
-      @bank_details = BankDetail.all
-    end
-  
     def show
-
-      @bank_details = BankDetail.find(params[:id])
-    end
-  
-    def new
-      @bank_details = BankDetail.new
+      # binding.pry
+      user_id = params[:id]
+      bank_details = BankDetail.find_by(user_id: user_id)
+      if bank_details.present?
+        render json: { bank_details: bank_details}, status: :ok
+      else
+        render json: { error: 'Bank Detail not found' }, status: :not_found
+      end
     end
   
     def create
       # binding.pry
-      # @user = User.find(params[:id])
-      params[:user_id] = current_user.id
-      @user = User.find(params[:user_id])
+      @user = current_user 
       bank_details = @user.bank_details.new(bank_params)
       if bank_details.save
         render json: { message: 'Bank Detils created successfully' }
@@ -28,42 +22,37 @@ class BankDetailsController < ApplicationController
       end
     end
   
-    def edit
-      @bank_details = BankDetail.find(params[:id])
-    end
-  
     def update
-      @bank_details = BankDetail.find(params[:id])
-  
-      if @bank_details.update(bank_params)
-        # redirect_to @bank_details
+      # binding.pry
+      user_id = params[:id]
+      bank_details = BankDetail.find_by(user_id: user_id)
+    
+      if bank_details
+        if bank_details.update(bank_params)
+          render json: bank_details
+        else
+          render json: bank_details.errors
+        end
       else
-        render :edit, status: :unprocessable_entity
+        render json: { error: 'Bank Detail not found' }, status: :not_found
       end
     end
+    
   
     def destroy
-      @bank_details = BankDetail.find(params[:id])
-      @bank_details.destroy
-  
-    #   redirect_to root_path, status: :see_other
+      # binding.pry
+      user_id = params[:id]
+      bank_details = BankDetail.find_by(user_id: user_id)
+      if bank_details
+        if bank_details.destroy
+          render json: { message: 'Bank details deleted successfully' }, status: :ok
+        end
+      end
     end
-  
+
+
     private
       def bank_params
         params.require(:bank_details).permit(:account_name, :account_number, :ifsc, :cancelled_cheque)
       end
   end
-  
-
-
-
-
-
-
-
-
-
-
-
-

@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2023_07_25_071406) do
     t.string "account_name"
     t.string "account_number"
     t.string "ifsc"
-    t.string "cancelled_cheque"
+    t.string "cancelled_cheque" 
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
