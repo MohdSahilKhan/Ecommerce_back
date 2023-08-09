@@ -438,6 +438,57 @@ paths:
       responses: 
         '201':
           description: Created
+    put:
+      summary: Add profile picture.
+      tags:
+        - Users API
+      parameters:
+        - name: id
+          in: path
+          description: ID to update profile picture.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile_picture:
+                  type: string
+                  format: binary
+      responses: 
+        '201':
+          description: Created 
+<<<<<<< HEAD
+    put:
+      summary: Add profile picture.
+      tags:
+        - Users API
+      parameters:
+        - name: id
+          in: path
+          description: ID to update profile picture.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile_picture:
+                  type: string
+                  format: binary
+      responses: 
+        '201':
+          description: Created 
+=======
+>>>>>>> origin/integrate/profile_picture
   
   /users/new_user:
     post:
@@ -783,7 +834,121 @@ paths:
         responses: 
           '201':
             description: Created
-    
+
+
+  /bank_details:
+    post:
+        summary: Create Bank details.
+        tags:
+          - Bank details API
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank_detail :
+                    type: object
+                    properties:
+                      account_name:
+                        type: string
+                      account_number:
+                        type: string
+                      ifsc:
+                        type: string
+                      cancelled_cheque:
+                        type: string  
+        responses:
+          '201':
+            description: Created
+          
+  /bank_details/{user_id}:
+    get:
+      summary: Show bank details.
+      tags:
+        - Bank details API
+      parameters:
+        - name: user_id
+          in: path
+          description: User-id of the Bank
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank_details:
+                    type: object
+                    properties:
+                      account_name:
+                        type: string
+                      account_number:
+                        type: string
+                      ifsc:
+                        type: string
+                      cancelled_cheque:
+                        type: string
+                      # user_id:
+                      #   type: integer
+                      #   format: int64
+      responses:
+        '201':
+          description: Created
+
+    put:
+      summary: Update Bank Details.
+      tags:
+        - Bank details API
+      parameters:
+        - name: user_id
+          in: path
+          description: User-id to update bank details 
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bank_detail:
+                  type: object
+                  properties:
+                    account_name:
+                      type: string
+                    account_number:
+                      type: string
+                    ifsc:
+                      type: string
+                    cancelled_cheque:
+                      type: string
+      responses:
+        '201':
+          description: Created
+
+    delete:
+      summary: Delete Bank details .
+      tags:
+        - Bank details API
+      parameters:
+        - name: user_id
+          in: path
+          description: ID of the bank details to delete
+          required: true
+          schema:
+            type: integer
+      responses: 
+        '201':
+          description: Created 
+
 
 servers:
 - url: http://{defaultHost}
