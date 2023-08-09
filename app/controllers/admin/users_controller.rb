@@ -8,7 +8,6 @@ module Admin
         :date_of_birth,
         :date_of_joining,
         :email,
-        :emergency_contact,
         :employee_id,
         :employee_type,
         :password,
@@ -17,7 +16,11 @@ module Admin
         :full_name,
         :job_type,
         :linkedin_profile,
-        :location,
+        :gender,
+        :city,
+        :state,
+        :pincode,
+        :address,
         :login_token,
         :manager_id,
         :managers,
@@ -25,7 +28,6 @@ module Admin
         :mother_name,
         :name,
         :notice_period,
-        :official_email,
         :personal_email,
         :relieving_date,
         :remember_created_at,
@@ -37,6 +39,8 @@ module Admin
         :retention_bonus_no,
         :retention_time,
         :uan_no,
+        :designation,
+        :emergency_contact_no,
         role_ids: [] 
       )
     end

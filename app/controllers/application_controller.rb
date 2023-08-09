@@ -1,3 +1,6 @@
+
+require 'jwt'
+
 class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   # before_action :authenticate_user!, except: [:new, :create]
@@ -6,12 +9,32 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     token = request.headers['Authorization']&.split(' ')&.last
-    user = User.find_by(login_token: token)
-
-    if user.present? && user.login_token.present?
-      sign_in user, store: false
+    if token.nil?
+      render json: { error: 'Unauthorized' }, status: :unauthorized
     else
-      render json: { error: 'Invalid token' }, status: :unauthorized
+      payload = verify_token(token)
+      if payload.nil?
+        render json: { error: 'Invalid token' }, status: :unauthorized
+      else
+        expiration_time = Time.at(payload['exp'])
+        if expiration_time < Time.now
+          render json: { error: 'Token has expired' }, status: :unauthorized
+        else
+          user = User.find_by(id: payload['user_id'])
+          if user.nil? || user.login_token != token
+            render json: { error: 'Invalid token' }, status: :unauthorized
+          else
+            sign_in user, store: false
+          end
+        end
+      end
     end
+  end
+
+  def verify_token(token)
+    secret_key = Rails.application.secrets.secret_key_base
+    JWT.decode(token, secret_key, true, algorithm: 'HS256').first
+  rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+    nil
   end
 end

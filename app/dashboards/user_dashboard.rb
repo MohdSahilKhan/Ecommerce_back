@@ -5,11 +5,10 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     blood_group: Field::String,
     contact_no: Field::String,
-    date_of_birth: Field::DateTime,
+    date_of_birth: Field::Date,
     date_of_joining: Field::String,
     email: Field::String,
     password: Field::String,
-    emergency_contact: Field::String,
     employee_id: Field::String,
     employee_type: Field::String,
     encrypted_password: Field::String,
@@ -18,7 +17,6 @@ class UserDashboard < Administrate::BaseDashboard
     full_name: Field::String,
     job_type: Field::String,
     linkedin_profile: Field::String,
-    location: Field::String,
     login_token: Field::String,
     manager_id: Field::Number,
     managers: Field::HasMany,
@@ -26,7 +24,6 @@ class UserDashboard < Administrate::BaseDashboard
     mother_name: Field::String,
     name: Field::String,
     notice_period: Field::String,
-    official_email: Field::String,
     personal_email: Field::String,
     relieving_date: Field::String,
     remember_created_at: Field::DateTime,
@@ -39,6 +36,13 @@ class UserDashboard < Administrate::BaseDashboard
     retention_time: Field::String,
     roles: Field::HasMany.with_options(class_name: "Role"),
     uan_no: Field::String,
+    gender: Field::String,
+    city: Field::String,
+    state: Field::String,
+    pincode: Field::String,
+    address: Field::String,
+    designation: Feild::String,
+    emergency_contact_no: Feild::String
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
@@ -55,7 +59,11 @@ class UserDashboard < Administrate::BaseDashboard
     date_of_birth
     date_of_joining
     email
-    emergency_contact
+    gender 
+    city
+    state
+    pincode
+    address
     employee_id
     employee_type
     esic_no
@@ -63,14 +71,12 @@ class UserDashboard < Administrate::BaseDashboard
     full_name
     job_type
     linkedin_profile
-    location
     manager_id
     managers
     marital_status
     mother_name
     name
     notice_period
-    official_email
     personal_email
     relieving_date
     resignation_date
@@ -80,6 +86,8 @@ class UserDashboard < Administrate::BaseDashboard
     retention_time
     uan_no
     roles
+    designation
+    emergency_contact_no
   ].freeze
 
   FORM_ATTRIBUTES = %i[
@@ -89,7 +97,6 @@ class UserDashboard < Administrate::BaseDashboard
     date_of_joining
     email
     password
-    emergency_contact
     employee_id
     employee_type
     esic_no
@@ -97,11 +104,15 @@ class UserDashboard < Administrate::BaseDashboard
     full_name
     job_type
     linkedin_profile
-    location
     manager_id
     managers
     marital_status
     mother_name
+    gender
+    city
+    state
+    pincode
+    address
     name
     notice_period
     official_email
@@ -114,6 +125,8 @@ class UserDashboard < Administrate::BaseDashboard
     retention_time
     roles
     uan_no
+    designation
+    emergency_contact_no
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze

@@ -11,6 +11,14 @@ class User < ApplicationRecord
   foreign_key: 'user_id',
   association_foreign_key: 'manager_id' 
 
+  has_many :documents , dependent: :destroy
+  before_destroy :delete_documents
+
+  private
+
+  def delete_documents
+    self.documents.destroy_all
+  end
   # validates :employee_type, inclusion: { in: ['full time', 'contract'] }
   # validates :job_type, inclusion: { in: ['remote', 'wfo'] }
 

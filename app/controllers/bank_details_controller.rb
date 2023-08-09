@@ -53,6 +53,6 @@ class BankDetailsController < ApplicationController
 
     private
       def bank_params
-        params.require(:bank_details).permit(:account_name, :account_number, :ifsc, :cancelled_cheque)
+        params.require(:bank_detail).permit(:account_name, :account_number, :ifsc, :cancelled_cheque)
       end
   end
