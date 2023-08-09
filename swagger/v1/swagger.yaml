@@ -462,6 +462,7 @@ paths:
       responses: 
         '201':
           description: Created 
+<<<<<<< HEAD
     put:
       summary: Add profile picture.
       tags:
@@ -486,6 +487,8 @@ paths:
       responses: 
         '201':
           description: Created 
+=======
+>>>>>>> origin/integrate/profile_picture
   
   /users/new_user:
     post:
@@ -946,8 +949,6 @@ paths:
         '201':
           description: Created 
 
-
-  
 
 servers:
 - url: http://{defaultHost}
