@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+  before_save :ensure_login_token
   has_and_belongs_to_many :managers,
   class_name: 'User',
   join_table: 'managers_users',
@@ -13,6 +13,17 @@ class User < ApplicationRecord
 
   has_many :documents , dependent: :destroy
   before_destroy :delete_documents
+
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, on: :create
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
+
+  def ensure_login_token
+    self.login_token ||= Devise.friendly_token
+  end
+
+  def regenerate_login_token
+    self.update!(login_token: Devise.friendly_token)
+  end
 
   private
 
